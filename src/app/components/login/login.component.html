@@ -1,0 +1,99 @@
+<html>
+ <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <body>
+        <div class="container" id="container">
+            <div class="form-container sign-up-container">
+                <div class="left-panel">
+                    <div>Welcome to <b>Miracle's ELEKTRA</b> where everything is for you!</div><br>
+                    <footer>Built by <span>Miracle</span> for Miracle!</footer>		
+                </div>
+            </div>
+            
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-right">
+                        <img src="../../../assets/miracle-black.svg" width="150">
+                        <h4 class="heading-text">Login to your account</h4><br>
+                        <mat-grid-list cols="12" rowHeight="90px">
+                            <div class="system-container">
+                                <div class="example-form">
+                                    <mat-grid-tile [colspan]="12">
+                                        <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon> &nbsp; &nbsp; &nbsp;
+                                        <mat-form-field  appearance="outline">                                            
+                                            <mat-label> Username</mat-label>                                             
+                                            <input matInput type="text" [(ngModel)]="userName"  placeholder="Username">                                                                            
+                                        </mat-form-field>
+                                    </mat-grid-tile>
+                                </div>
+                            </div>
+                        </mat-grid-list>
+                        <mat-grid-list cols="12" rowHeight="90px">
+                            <div class="system-container">
+                                <div class="example-form">
+                                    <mat-grid-tile [colspan]="12">
+                                        <mat-icon fontSet="material-icons-outlined">lock</mat-icon> &nbsp; &nbsp; &nbsp;
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Password</mat-label>
+                                            <input matInput required [(ngModel)]="password" [type]="hide ? 'password' : 'text'" placeholder="Enter Password" >
+                                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                                [attr.aria-pressed]="hide">
+                                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                            </button>
+                                        </mat-form-field>
+                                    </mat-grid-tile>
+                                </div>
+                            </div>
+                        </mat-grid-list>
+
+                        <!-- <mat-grid-list cols="1" rowHeight="90px">
+                            <mat-grid-tile colspan="1">
+                                <div class="form-container form">
+                                    <mat-form-field  appearance="outline">
+                                        <mat-label>User Name</mat-label>
+                                        <input matInput [(ngModel)]="userName" placeholder="Enter User Name">
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile colspan="1">
+                                <div class="form-container form">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Password</mat-label>
+                                        <input matInput required [type]="hide ? 'password' : 'text'" placeholder="Enter Password" [(ngModel)]="password">
+                                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                            [attr.aria-pressed]="hide">
+                                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list> -->
+
+                        <!-- <mat-grid-list cols="12" rowHeight="50px">
+                            <div class="system-container">
+                                <form class="example-form">
+                                <mat-grid-tile [colspan]="6">
+                                    <mat-checkbox>Remember me</mat-checkbox>
+                                </mat-grid-tile>  
+                                <mat-grid-tile [colspan]="6">
+                                    <a href="#">Forgot Password</a>
+                                </mat-grid-tile>  
+                                </form>
+                            </div>                         
+                        </mat-grid-list> -->
+                        <mat-grid-list cols="12" rowHeight="50px"> 
+                            <div class="system-container">
+                                <form class="example-form">
+                                <mat-grid-tile [colspan]="12">
+                                    <button mat-raised-button color="primary" style="background: #00aae7;width: 66%;margin-left: 40px;" (click)="login()"  >Login</button>
+                                </mat-grid-tile>  
+                                </form>
+                            </div>                         
+                        </mat-grid-list>
+                    </div>
+                    <p>&copy; 2020 Miracle Software Systems, Inc</p>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>

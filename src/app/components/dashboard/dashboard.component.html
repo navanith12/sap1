@@ -1,0 +1,120 @@
+<img *ngIf="loader" src="../assets/loader.gif" class="loader" style="margin-top:200px">
+
+<mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event, 1)" rowHeight="200px" *ngIf="!loader">
+  <mat-grid-tile colspan="1">
+    <div class="form-container">
+      <mat-card class="example-card" (click)="navigateToPage('/datalake/jobs')">
+        <mat-card-header>
+          <mat-card-title>Jobs</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-grid-list cols="5" rowHeight="35px">
+            <mat-grid-tile colspan="2" rowspan="3">
+              <div class="form-container">
+                <mat-icon>card_travel</mat-icon>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2">
+              <div class="form-container"> BAPI </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1"> {{dashboardData.jobs.bapi}} </mat-grid-tile>
+            <mat-grid-tile colspan="2">
+              <div class="form-container"> Table </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1"> {{dashboardData.jobs.table}} </mat-grid-tile>
+            <mat-grid-tile colspan="2">
+              <div class="form-container"> Extractor </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1"> {{dashboardData.jobs.extractor}} </mat-grid-tile>
+          </mat-grid-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="1">
+    <div class="form-container">
+      <mat-card class="example-card" (click)="navigateToPage('/datalake/schedule')">
+        <mat-card-header>
+          <mat-card-title>Schedule</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-grid-list cols="5" rowHeight="35px">
+            <mat-grid-tile colspan="2" rowspan="3">
+              <div class="form-container">
+                <mat-icon>schedule</mat-icon>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2">
+              <div class="form-container"> Table </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1"> {{dashboardData.schedule.table}} </mat-grid-tile>
+            <mat-grid-tile colspan="2">
+              <div class="form-container"> Extractor </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1"> {{dashboardData.schedule.extractor}} </mat-grid-tile>
+          </mat-grid-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="1">
+    <div class="form-container">
+      <mat-card class="example-card" (click)="navigateToPage('/datalake/systems')">
+        <mat-card-header>
+          <mat-card-title>Systems</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-grid-list cols="5" rowHeight="35px">
+            <mat-grid-tile colspan="2" rowspan="3">
+              <div class="form-container">
+                <mat-icon>devices</mat-icon>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2">
+              <div class="form-container"> Source </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1"> {{dashboardData.systems.source}} </mat-grid-tile>
+            <mat-grid-tile colspan="2">
+              <div class="form-container"> Target </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1"> {{dashboardData.systems.target}} </mat-grid-tile>
+          </mat-grid-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="1">
+    <div class="form-container">
+      <mat-card class="example-card" (click)="navigateToPage('/datalake/monitoring')">
+        <mat-card-header>
+          <mat-card-title>Monitoring</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-grid-list cols="5" rowHeight="35px">
+            <mat-grid-tile colspan="2" rowspan="3">
+              <div class="form-container">
+                <mat-icon>tv</mat-icon>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2">
+              <div class="form-container"> In Progress </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1"> {{dashboardData.monitoring.progress}} </mat-grid-tile>
+            <mat-grid-tile colspan="2">
+              <div class="form-container"> Cancelled </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1"> {{dashboardData.monitoring.cancel}} </mat-grid-tile>
+            <mat-grid-tile colspan="2">
+              <div class="form-container"> Completed </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1"> {{dashboardData.monitoring.complete}} </mat-grid-tile>
+          </mat-grid-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-grid-tile>
+
+</mat-grid-list>

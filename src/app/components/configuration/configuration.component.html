@@ -1,0 +1,575 @@
+<mat-card>
+    <div class="page-title">
+        <h2>Configuration</h2>
+    </div>
+    <mat-tab-group>
+        <mat-tab label="Control Table">
+            <br><br>
+            <mat-grid-list cols="6" rowHeight="90px">
+                <mat-grid-tile colspan="2">
+                    <div class="form-container">
+                        <mat-form-field  appearance="outline">
+                            <mat-label>Search</mat-label>
+                            <input matInput [(ngModel)]="controlSearchKey" placeholder="Search" autocomplete="off"
+                                (keyup)="controlApplyFilter()">
+                            <!-- <mat-icon matPrefix>favorite</mat-icon>  -->
+                            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="controlSearchKey"
+                                (click)="onControlSearchClear()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="3"></mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container jobcreate">
+                        <button mat-raised-button color="primary" (click)="getControlData()">
+                            <mat-icon>sync</mat-icon>Sync
+                        </button>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <table mat-table [dataSource]="controlTableData">
+
+                <!-- S.No Column -->
+                <ng-container matColumnDef="#">
+                    <th mat-header-cell *matHeaderCellDef style="width: 10%;text-align: center; color: #2368a0;"> #
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index;" style="width: 10%;text-align: center;">
+                        {{(this.controlTableData.paginator.pageIndex * this.controlTableData.paginator.pageSize)+ i+1}}
+                    </td>
+                </ng-container>
+
+                <!-- extractor Column -->
+                <ng-container matColumnDef="extractor">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30%;text-align: left; color: #2368a0;">
+                        Extractor Name </th>
+                    <td mat-cell *matCellDef="let element" style="width: 30%;text-align: left;">
+                        {{element.extractor | uppercase}} </td>
+                </ng-container>
+
+                <!-- current_token Column -->
+                <ng-container matColumnDef="current_token">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30%;text-align: left; color: #2368a0;"> Current
+                        Token </th>
+                    <td mat-cell *matCellDef="let element" style="width: 30%;text-align: left;">
+                        {{element.current_token}} </td>
+                </ng-container>
+
+                <!-- previous_token Column -->
+                <ng-container matColumnDef="previous_token">
+                    <th mat-header-cell *matHeaderCellDef style="width: 30%;text-align: left; color: #2368a0;">
+                        Previous Token </th>
+                    <td mat-cell *matCellDef="let element" style="width: 30%;text-align: left;">
+                        {{element.previous_token==null? '-' : element.previous_token}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="controlTableHeaders"></tr>
+                <tr mat-row *matRowDef="let row; columns: controlTableHeaders;"></tr>
+            </table>
+            <img *ngIf="loader" src="../assets/loader.gif" class="loader">
+            <mat-paginator #ControlPageinator="matPaginator" [hidePageSize]=true [pageSize]="10" showFirstLastButtons>
+            </mat-paginator>
+        </mat-tab>
+
+        <mat-tab label="Packages">
+            <br><br>
+            <mat-grid-list cols="6" rowHeight="90px">
+                <mat-grid-tile colspan="2">
+                    <div class="form-container">
+                        <mat-form-field  appearance="outline">
+                            <mat-label>Search</mat-label>
+                            <input matInput [(ngModel)]="configSearchKey" placeholder="Search" autocomplete="off"
+                                (keyup)="configApplyFilter()">
+                            <!-- <mat-icon matPrefix>favorite</mat-icon>  -->
+                            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="configSearchKey"
+                                (click)="onConfigSearchClear()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="3"></mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container jobcreate">
+                        <button mat-raised-button color="primary"
+                            (click)="configurationModel(configurationDialog, 'Create')" style="margin-right: 7px;">
+                            <mat-icon>add</mat-icon> Package
+                        </button>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <table mat-table [dataSource]="packageTableData">
+
+                <!-- S.No Column -->
+                <ng-container matColumnDef="#">
+                    <th mat-header-cell *matHeaderCellDef style="width: 5%;text-align: center; color: #2368a0;"> # </th>
+                    <td mat-cell *matCellDef="let element; let i = index;" style="width: 5%;text-align: center;">
+                        {{(this.packageTableData.paginator.pageIndex * this.packageTableData.paginator.pageSize)+ i+1}}
+                    </td>
+                </ng-container>
+
+                <!-- extractorName Column -->
+                <ng-container matColumnDef="extractorName">
+                    <th mat-header-cell *matHeaderCellDef style="width: 19%;text-align: left; color: #2368a0;">
+                        Extractor Name </th>
+                    <td mat-cell *matCellDef="let element" style="width: 19%;text-align: left;">
+                        {{element.extractorName | uppercase}} </td>
+                </ng-container>
+
+                <!-- extractormodeType Column -->
+                <ng-container matColumnDef="extractormodeType">
+                    <th mat-header-cell *matHeaderCellDef style="width: 19%;text-align: left; color: #2368a0;"> Mode of
+                        Extractor </th>
+                    <td mat-cell *matCellDef="let element" style="width: 19%;text-align: left;">
+                        {{element.extractormodeType | uppercase}} </td>
+                </ng-container>
+
+                <!-- packetsize Column -->
+                <ng-container matColumnDef="packetsize">
+                    <th mat-header-cell *matHeaderCellDef style="width: 19%;text-align: center; color: #2368a0;">
+                        Package Size (In KB) </th>
+                    <td mat-cell *matCellDef="let element" style="width: 19%;text-align: center;">
+                        {{element.packetsize}} </td>
+                </ng-container>
+
+                <!-- numberofthreads Column -->
+                <ng-container matColumnDef="numberofthreads">
+                    <th mat-header-cell *matHeaderCellDef style="width: 19%;text-align: center; color: #2368a0;"> Number
+                        of Threads </th>
+                    <td mat-cell *matCellDef="let element" style="width: 19%;text-align: center;">
+                        {{element.numberofthreads}} </td>
+                </ng-container>
+
+                <ng-container *ngIf="true" matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef style="width: 19%; text-align: center; color: #2368a0;">
+                        Actions </th>
+                    <td mat-cell *matCellDef="let element" style="width: 19%; text-align: center;">
+                        <button mat-icon-button
+                            (click)="selectedConfigData=element; configurationModel(configurationDialog, 'Edit')">
+                            <mat-icon matTooltip="Edit" matTooltipPosition="above">edit_outline</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn"
+                            (click)="selectedConfigData=element; configurationModel(configurationExecDeleteDialog, 'Delete')">
+                            <mat-icon matTooltip="Delete" matTooltipPosition="above">delete_outline</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="packageTableHeaders"></tr>
+                <tr mat-row *matRowDef="let row; columns: packageTableHeaders;"></tr>
+            </table>
+            <img *ngIf="loader" src="../assets/loader.gif" class="loader">
+            <mat-paginator #PackagePageinator="matPaginator" [hidePageSize]=true [pageSize]="10" showFirstLastButtons>
+            </mat-paginator>
+        </mat-tab>
+
+        <mat-tab label="Extractor Service">
+            <br><br>
+            <mat-grid-list cols="6" rowHeight="90px">
+                <mat-grid-tile colspan="2">
+                    <div class="form-container">
+                        <mat-form-field  appearance="outline">
+                            <mat-label>Search</mat-label>
+                            <input matInput [(ngModel)]="serviceSearchKey" placeholder="Search" autocomplete="off"
+                                (keyup)="serviceApplyFilter()">
+                            <!-- <mat-icon matPrefix>favorite</mat-icon>  -->
+                            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="serviceSearchKey"
+                                (click)="onServiceSearchClear()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="3"></mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container jobcreate">
+                        <button mat-raised-button color="primary"
+                            (click)="serviceModel(serviceDialog, 'Create')" style="margin-right: 7px;">
+                            <mat-icon>add</mat-icon> Service
+                        </button>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <div class="table-responsive">
+                <table mat-table [dataSource]="serviceTableData">
+                    <!-- S.No Column -->
+                    <ng-container matColumnDef="#">
+                        <th mat-header-cell *matHeaderCellDef style="color: #2368a0;"> #
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index;">
+                            {{(this.serviceTableData.paginator.pageIndex * this.serviceTableData.paginator.pageSize)+ i+1}}
+                        </td>
+                    </ng-container>
+                    <!-- extractorName Column -->
+                    <ng-container matColumnDef="extractorName">
+                        <th mat-header-cell *matHeaderCellDef style="color: #2368a0;">
+                            Extractor Name </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.extractorName | uppercase}} </td>
+                    </ng-container>
+                    <!-- serviceName Column -->
+                    <ng-container matColumnDef="serviceName">
+                        <th mat-header-cell *matHeaderCellDef style="color: #2368a0;"> Service Name </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.serviceName}} </td>
+                    </ng-container>
+                    <!-- sourcetype Column -->
+                    <ng-container matColumnDef="sourcetype">
+                        <th mat-header-cell *matHeaderCellDef style="color: #2368a0;"> Source Type </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.sourcetype}} </td>
+                    </ng-container>
+                    <!-- actions Column -->
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: center; color: #2368a0;">
+                            Actions </th>
+                        <td mat-cell *matCellDef="let element" style="width: 15%;text-align: center;">
+                            <button mat-icon-button color="primary"
+                                (click)="selectedServiceData=element; serviceModel(serviceDialog, 'View')">
+                                <mat-icon matTooltip="View" matTooltipPosition="above">remove_red_eye</mat-icon>
+                            </button>
+                            <button mat-icon-button
+                                (click)="selectedServiceData=element; serviceModel(serviceDialog, 'Edit')">
+                                <mat-icon matTooltip="Edit" matTooltipPosition="above">edit_outline</mat-icon>
+                            </button>
+                            <button mat-icon-button color="warn"
+                                (click)="selectedServiceData=element; serviceModel(serviceDeleteDialog, 'Delete')">
+                                <mat-icon matTooltip="Delete" matTooltipPosition="above">delete_outline</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="serviceTableHeaders"></tr>
+                    <tr mat-row *matRowDef="let row; columns: serviceTableHeaders;"></tr>
+                </table>
+            </div>
+            <mat-paginator #ServicePageinator="matPaginator" [hidePageSize]=true [pageSize]="10" showFirstLastButtons>
+            </mat-paginator>
+        </mat-tab>
+
+        <mat-tab label="Category">
+            <br><br>
+            <mat-grid-list cols="6" rowHeight="90px">
+                <mat-grid-tile colspan="2">
+                    <div class="form-container">
+                        <mat-form-field  appearance="outline">
+                            <mat-label>Search</mat-label>
+                            <input matInput [(ngModel)]="categorySearchKey" placeholder="Search" autocomplete="off"
+                                (keyup)="categoryApplyFilter()">
+                            <!-- <mat-icon matPrefix>favorite</mat-icon>  -->
+                            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="categorySearchKey"
+                                (click)="onCategorySearchClear()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="3"></mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container jobcreate">
+                        <button mat-raised-button color="primary"
+                            (click)="categoryModel(CategoeyDialog, 'Create')" style="margin-right: 7px;">
+                            <mat-icon>add</mat-icon> Category
+                        </button>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <table mat-table [dataSource]="categoryTableData">
+
+                <!-- S.No Column -->
+                <ng-container matColumnDef="#">
+                    <th mat-header-cell *matHeaderCellDef style="width: 5%;text-align: center; color: #2368a0;"> # </th>
+                    <td mat-cell *matCellDef="let element; let i = index;" style="width: 5%;text-align: center;">
+                        {{(this.categoryTableData.paginator.pageIndex * this.categoryTableData.paginator.pageSize)+ i+1}}
+                    </td>
+                </ng-container>
+
+                <!-- catergoryName Column -->
+                <ng-container matColumnDef="catergoryName">
+                    <th mat-header-cell *matHeaderCellDef style="width: 19%;text-align: left; color: #2368a0;">
+                        Category Name </th>
+                    <td mat-cell *matCellDef="let element" style="width: 19%;text-align: left;">
+                        {{element.catergoryName | uppercase}} </td>
+                </ng-container>
+
+                 <!-- categoryType Column -->
+                 <ng-container matColumnDef="categoryType">
+                    <th mat-header-cell *matHeaderCellDef style="width: 19%;text-align: left; color: #2368a0;">
+                        Category Type </th>
+                    <td mat-cell *matCellDef="let element" style="width: 19%;text-align: left;">
+                        {{element.categoryType | uppercase}} </td>
+                </ng-container>
+
+                <!-- categoryDescription Column -->
+                <ng-container matColumnDef="categoryDescription">
+                    <th mat-header-cell *matHeaderCellDef style="width: 19%;text-align: left; color: #2368a0;"> Description </th>
+                    <td mat-cell *matCellDef="let element" style="width: 19%;text-align: left;">
+                        {{element.categoryDescription | uppercase}} </td>
+                </ng-container>
+
+                <!-- packetsize Column -->
+                <!-- <ng-container matColumnDef="packetsize">
+                    <th mat-header-cell *matHeaderCellDef style="width: 19%;text-align: center; color: #2368a0;">
+                        Package Size (In KB) </th>
+                    <td mat-cell *matCellDef="let element" style="width: 19%;text-align: center;">
+                        {{element.packetsize}} </td>
+                </ng-container> -->
+
+
+                <ng-container *ngIf="true" matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef style="width: 19%; text-align: center; color: #2368a0;">
+                        Actions </th>
+                    <td mat-cell *matCellDef="let element" style="width: 19%; text-align: center;">
+                        <button mat-icon-button
+                            (click)="selectedCategoryData=element; categoryModel(CategoeyDialog, 'Edit')">
+                            <mat-icon matTooltip="Edit" matTooltipPosition="above">edit_outline</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn"
+                            (click)="selectedCategoryData=element; categoryModel(CategoeyDialog, 'Delete')">
+                            <mat-icon matTooltip="Delete" matTooltipPosition="above">delete_outline</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="categoryTableHeaders"></tr>
+                <tr mat-row *matRowDef="let row; columns: categoryTableHeaders;"></tr>
+            </table>
+            <img *ngIf="loader" src="../assets/loader.gif" class="loader">
+            <mat-paginator #CategoryPageinator="matPaginator" [hidePageSize]=true [pageSize]="10" showFirstLastButtons>
+            </mat-paginator>
+        </mat-tab>
+
+    </mat-tab-group>
+
+</mat-card>
+
+
+<ng-template #configurationDialog>
+    <span>
+        <button style="float:right;" class="close" mat-button matDialogClose>
+            <mat-icon>close</mat-icon>
+        </button>
+    </span>
+
+    <h2 matDialogTitle style="text-align: center;"><b>{{ modelTitle }} Configuration </b></h2>
+    <form [formGroup]="configurationForm">
+        <mat-dialog-content>
+            <mat-grid-list cols="2" rowHeight="90px">
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field [hideRequiredMarker]="false" [floatLabel]="auto" appearance="outline">
+                            <mat-label> Extractor </mat-label>
+                            <input matInput formControlName="extractorName" placeholder="Enter Extractor"
+                                cdkFocusInitial>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Mode of Extractor</mat-label>
+                            <input matInput formControlName="extractormodeType" placeholder="Enter Mode of Extractor">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label> Package Size </mat-label>
+                            <input matInput formControlName="packetsize" placeholder="Enter Package Size">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label> Number of Threads </mat-label>
+                            <input matInput type="number" min='1' max="10" formControlName="numberofthreads"
+                                placeholder="Enter Number of Threads">
+                            <mat-error *ngIf="true">{{getErrorMessage('threads')}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+            </mat-grid-list>
+
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button [disabled]="!configurationForm.valid" mat-raised-button matDialogClose color="primary"
+                (click)=createUpdateConfig(modelTitle)>Submit</button>
+        </mat-dialog-actions>
+    </form>
+</ng-template>
+
+<ng-template #configurationExecDeleteDialog>
+    <span>
+        <button style="float:right;" class="close" mat-button matDialogClose>
+            <mat-icon>close</mat-icon>
+        </button>
+    </span>
+    <h1 mat-dialog-title style="text-align: center;"> <b>{{ modelTitle }} </b></h1>
+    <div mat-dialog-content style="text-align: center;">
+        <p>Are you sure, you want to {{ modelTitle | lowercase }} <b>{{ selectedConfigData.extractorName+'?' }} </b></p>
+    </div>
+    <br><br>
+
+    <div mat-dialog-actions align="center">
+        <button mat-raised-button [mat-dialog-close]="" color="primary" (click)="deleteConfig()"> Yes</button>
+        <button mat-raised-button matDialogClose color="warn" cdkFocusInitial>No</button>
+    </div>
+</ng-template>
+
+
+
+<ng-template #serviceDialog>
+    <span>
+        <button style="float:right;" class="close" mat-button matDialogClose>
+            <mat-icon>close</mat-icon>
+        </button>
+    </span>
+
+    <h2 matDialogTitle style="text-align: center;"><b>{{ modelTitle }} Service </b></h2>
+    <form [formGroup]="serviceForm">
+        <mat-dialog-content>
+            <mat-grid-list cols="2" rowHeight="90px">
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field [hideRequiredMarker]="false" [floatLabel]="auto" appearance="outline">
+                            <mat-label> Extractor </mat-label>
+                            <input matInput formControlName="extractorName" placeholder="Enter Extractor"
+                                cdkFocusInitial>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Service</mat-label>
+                            <input matInput formControlName="serviceName" placeholder="Enter Service Name">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Source Type</mat-label>
+                            <mat-select formControlName="sourcetype" (ngModelChange)="filterSourceSystems(serviceForm.value.sourcetype)">
+                                <mat-option *ngFor="let src of sourceTypeList" [value]="src"> {{src}} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" *ngIf="serviceForm.value.sourcetype=='BW'">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Sub Source Type</mat-label>
+                            <mat-select formControlName="subSourceType">
+                                <mat-option *ngFor="let src of subSourceTypeList" [value]="src"> {{src}} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Source System</mat-label>
+                            <mat-select formControlName="sourceSystem">
+                                <mat-option *ngFor="let src of sourceSystemList" [value]="src"> {{src}} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                
+            </mat-grid-list>
+
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button [disabled]="!serviceForm.valid" mat-raised-button matDialogClose color="primary"
+                (click)=createUpdateService(modelTitle)>Submit</button>
+        </mat-dialog-actions>
+    </form>
+</ng-template>
+
+<ng-template #serviceDeleteDialog>
+    <span>
+        <button style="float:right;" class="close" mat-button matDialogClose>
+            <mat-icon>close</mat-icon>
+        </button>
+    </span>
+    <h1 mat-dialog-title style="text-align: center;"> <b>{{ modelTitle }} </b></h1>
+    <div mat-dialog-content style="text-align: center;">
+        <p>Are you sure, you want to {{ modelTitle | lowercase }} <b>{{ selectedServiceData.extractorName+'?' }} </b></p>
+    </div>
+    <br><br>
+
+    <div mat-dialog-actions align="center">
+        <button mat-raised-button [mat-dialog-close]="" color="primary" (click)="deleteService()"> Yes</button>
+        <button mat-raised-button matDialogClose color="warn" cdkFocusInitial>No</button>
+    </div>
+</ng-template>
+
+
+
+<ng-template #CategoeyDialog >
+    <span>
+        <button style="float:right;" class="close" mat-button matDialogClose>
+            <mat-icon>close</mat-icon>
+        </button>
+    </span>
+    <h2 matDialogTitle style="text-align: center;"><b> {{ modelTitle }} Category</b></h2>
+    <!-- <img *ngIf="modelloader" src="../assets/loader.gif" class="loader"> -->
+    <form [formGroup]="categoryForm">
+        <mat-dialog-content>
+            <div *ngIf="modelTitle!='Delete'">
+                <mat-grid-list cols="2" rowHeight="90px">
+                    <mat-grid-tile colspan="1">
+                        <div class="form-container">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Category Name</mat-label>
+                                <input class="inputUppercase" matInput required placeholder="Enter Category Name" formControlName="catergoryName">
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1">
+                        <div class="form-container">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Category Type</mat-label>
+                                <mat-select required formControlName="categoryType" >
+                                    <mat-option value="EXTRACTOR"> EXTRACTOR </mat-option>
+                                    <mat-option value="TABLE"> TABLE </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <mat-grid-list cols="2" rowHeight="120px">
+                    <mat-grid-tile colspan="2">
+                        <div class="form-container">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Description</mat-label>
+                                <textarea class="inputUppercase" matInput required placeholder="Enter Description" formControlName="categoryDescription"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+            <div *ngIf="modelTitle=='Delete'">
+                <p style="text-align: center;">Are you sure, you want to {{ modelTitle | lowercase }} <b>{{ selectedCategoryData.catergoryName+'?' }} </b></p>
+            </div>
+        </mat-dialog-content>
+        <mat-dialog-actions *ngIf="modelTitle!='Delete'" align="end">
+            <button mat-raised-button matDialogClose color="warn" style="margin-right: 7px;">Cancel</button>
+            <button [disabled]="!categoryForm.valid" mat-raised-button matDialogClose color="primary"
+                (click)="addUpdateCategory(modelTitle);" style="margin-right: 7px;">Submit</button>
+        </mat-dialog-actions>
+        <mat-dialog-actions *ngIf="modelTitle=='Delete'" align="center">
+            <button mat-raised-button matDialogClose color="warn" style="margin-right: 7px;">No</button>
+            <button mat-raised-button matDialogClose color="primary"
+                (click)="deleteCategory();" style="margin-right: 7px;">Yes</button>
+        </mat-dialog-actions>
+    </form>
+</ng-template>

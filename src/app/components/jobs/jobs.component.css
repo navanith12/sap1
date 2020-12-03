@@ -1,0 +1,81 @@
+/* .stats-cards {
+    .mat-card {
+      overflow: hidden;
+    }
+  }
+   */
+    /* table {
+      width: 100%;
+    } */
+  /* section {
+    display: table;
+    margin: 8px;
+  }
+  
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    width: 120px;
+  }
+  
+  .example-button-row {
+    display: table-cell;
+  }
+  
+  .example-button-row button {
+    display: table-cell;
+    margin-right: 8px;
+    margin-left: 8px;
+  }
+  
+  .example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    width: 480px;
+  }
+  
+  .example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 160px;
+  } */
+  .mat-raised-button {
+    /* margin-left: 10px; */
+    /* box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12); */
+    /* max-width: 200px; */
+    margin-top: -20px;
+    height: 60px;
+    /* width: 100%; */
+    white-space: initial;
+  }
+
+/*   
+  .form-container {
+    display: flex; 
+    flex-direction: column;
+    width: 100%;
+    padding: 5px;
+  } */
+  /* .jobcreate mat-icon{
+    font-size:23px;
+  } */
+ 
+/*   
+  .search-form-field{
+    margin-left: 0px !important;
+  } */
+  /* .mat-header-cell {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 16px;
+} */
+
+/* .job-close .mat-icon-button{
+  height: 20px;
+ 
+}
+.job-close .mat-icon{
+  font-size: 20px;
+  line-height: 0px !important;
+  margin-top:-10px !important
+} */

@@ -1,0 +1,226 @@
+
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/assets/login.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;    
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: 'Montserrat',sans-serif;
+	height: 100vh;
+	/* margin: -20px 0 50px; */
+}
+body,p,a,h1,h2,h3,h4,h5,h6,table,tr,td,span,b,i,u,header,footer,div{
+	font-family: 'Montserrat',sans-serif
+  }
+
+
+.left-panel div {
+	text-align: right;
+    color: #FFFFFF;
+    width: 225px;
+	float: right;
+	font-size:24px;
+}
+
+.heading-text {
+	font-size: 	20px;
+	font-weight: 100;
+	line-height: 20px;
+	letter-spacing: 0.2px;
+    margin: 30px 0;
+    text-align: center;
+}
+
+span {
+	font-size: 12px;
+}
+
+a {
+	color: #8c8c8c;
+	font-size: 14px;
+	text-decoration: none;
+	margin: 15px 0;
+}
+img{
+    display: block;
+    margin: 0px auto;
+    margin-top: -30px;
+  }
+
+.example-form {
+	/* background-color: #00aae7cc; */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 100px;
+	height: 100%;
+    text-align: center;
+    width: 250px !important;
+}
+
+.system-container {
+    display: flex; 
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    /* padding: 5%; */
+  } 
+.container {
+	background: #00aae7cc;   
+     /* opacity: 0.8; */
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	min-height: 480px;
+}
+
+.form-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+}
+.example-form .mat-form-field{
+    width: 300px !important;
+    margin-left: -5px;
+}
+
+.example-form .mat-icon{
+	color:#00aae7;
+	font-size: 26px;
+	margin-top: -24px;
+}
+.sign-up-container {
+	left: 0;
+    width: 50%;
+    background: rgba(0, 170, 231, 0);
+    /* opacity: 0.6; */
+    color:#fff;
+	z-index: 1;
+}
+.left-panel{
+    padding: 50px;
+    margin-top: 80px;
+}
+.left-panel footer{
+  position: absolute;
+  right: 50px;
+  bottom: 40px;
+  width: 100%;
+  color: white;
+  
+  text-align: right !important;
+  font-size: 13px;
+}
+.left-panel footer span{
+	color: #000;
+	font-size: 13px;
+	font-weight: 500;
+}
+form p{
+    font-size:13px;
+    position: relative;
+    margin-top: 250px;
+    bottom:0px;
+    text-align: right;
+    color: #FFFFFF;
+}
+.sign-up-container p span{
+    color:#000;
+    font-weight: bold;
+    
+}
+.container.right-panel-active .sign-up-container {
+	transform: translateX(100%);
+	opacity: 1;
+	z-index: 5;
+	animation: show 0.6s;
+}
+
+
+
+.overlay-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	transition: transform 0.6s ease-in-out;
+	z-index: 100;
+}
+
+.container.right-panel-active .overlay-container{
+	transform: translateX(-100%);
+}
+
+.overlay {
+	background: #ffffff;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 0;
+	color: #232527;
+	position: relative;
+	left: -100%;
+	height: 100%;
+	width: 200%;
+}
+.overlay p {
+	/* color:#eee; */
+	position: absolute;
+	right: 75px;
+	bottom: 20px;
+	width: 100%;
+	text-align: right !important;
+  font-size: 13px;
+}
+
+.container.right-panel-active .overlay {
+  	transform: translateX(50%);
+}
+
+.overlay-panel {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 40px;
+	text-align: center;
+	top: 0;
+	height: 100%;
+	width: 50%;
+    left: 45%;
+}
+.overlay-right {
+	right: 0;
+}
+.system-container .mat-label::placeholder,mat-label{
+    /* color: #FFFFFF !important; */
+}
+.mat-primary{
+    /* background: #00aae7 !important; */
+}
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    color: #00aae7 !important;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    /* color: rgba(255, 255, 255, 0.4) !important; */
+}
+.las {
+    display: inline-block;
+    font: normal normal normal 22px/1 Line Awesome Free !important;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin-bottom: 22px;
+	color:#00aae7;
+	
+}

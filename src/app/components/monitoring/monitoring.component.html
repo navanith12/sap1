@@ -1,0 +1,253 @@
+<mat-card>
+    <div class="page-title">
+        <h2>Monitoring</h2>
+    </div>
+    <mat-tab-group>
+        <mat-tab label="Jobs" style="color: #2368a0;">
+            <br><br>
+            <mat-grid-list cols="6" rowHeight="90px">
+                <mat-grid-tile colspan="4">
+                    <div class="form-container">
+                        <!--  -->
+                        <mat-form-field  appearance="outline">
+                            <mat-label> Search</mat-label>
+                            <input matInput [(ngModel)]="jobName" placeholder="Search by Job Name/Created By" autocomplete="off"
+                            (keyup)="applyFilter()">
+                            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="jobName"
+                                (click)="onSearchClear()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <!-- <mat-grid-tile colspan="2">
+                    <div class="form-container">
+                        <mat-form-field [hideRequiredMarker]="true"  appearance="outline">
+                            <mat-label> Created By </mat-label>
+                            <input matInput [(ngModel)]="createdBy" placeholder="Enter Created By">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile> -->
+                <mat-grid-tile colspan="2">
+                    <div class="form-container">
+                        <mat-form-field [hideRequiredMarker]="true"  appearance="outline">
+                            <mat-label> Job Status </mat-label>
+                            <mat-select required multiple [(ngModel)]="jobStatus">
+                                <mat-option value="Finished">Finished</mat-option>
+                                <mat-option value="Cancelled">Cancelled</mat-option>
+                                <mat-option value="In Progress">In Progress</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+        
+                </mat-grid-tile>
+            </mat-grid-list>
+        
+            <mat-grid-list cols="6" rowHeight="90px">
+                <mat-grid-tile colspan="2">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>From Date</mat-label>
+                            <input matInput [(ngModel)]="fromDate" [max]="maxDate" [matDatepicker]="fromPicker" placeholder="From Date" (ngModelChange)="changeMaxDate()">
+                            <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #fromPicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="2">
+                    <div class="form-container">
+                        <mat-form-field [hideRequiredMarker]="true"  appearance="outline">
+                            <mat-label>To Date</mat-label>
+                            <input matInput [(ngModel)]="toDate" [min]="toMinDate" [max]="maxDate" [matDatepicker]="toPicker" placeholder="To Date">
+                            <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #toPicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container jobcreate">
+                        <button mat-raised-button color="primary" (click)="getLogsData()">
+                            <mat-icon>search</mat-icon>Search
+                        </button>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container jobcreate">
+                        <button mat-raised-button color="primary" >
+                            <mat-icon>sync</mat-icon>Sync
+                        </button>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        
+            <div class="table-responsive" >
+                <table mat-table [dataSource]="logsList">
+            
+                    <!-- S.No Column -->
+                    <ng-container matColumnDef="#">
+                        <th mat-header-cell *matHeaderCellDef style="width: 5%;text-align: left; color: #2368a0;"> # </th>
+                        <td mat-cell *matCellDef="let element; let i = index;" style="width: 5%;text-align: left;">
+                            {{(this.logsList.paginator.pageIndex * this.logsList.paginator.pageSize)+ i+1}} </td>
+                    </ng-container>
+            
+                    <!-- job_Name Column -->
+                    <ng-container matColumnDef="job_Name">
+                        <th mat-header-cell *matHeaderCellDef style="width: 20%;text-align: left; color: #2368a0;"> Job Name </th>
+                        <td mat-cell *matCellDef="let element" style="width: 20%;text-align: left;"> {{element.job_Id | uppercase }}
+                        </td>
+                    </ng-container>
+            
+                    <!-- spoolDoc Column -->
+                    <!-- <ng-container matColumnDef="spoolDoc">
+                        <th mat-header-cell *matHeaderCellDef style="width: 10%;text-align: left;"> Spool Doc </th>
+                        <td mat-cell *matCellDef="let element" style="width: 10%;text-align: left;"> {{element.spoolDoc}} </td>
+                    </ng-container> -->
+            
+                    <!-- createdBy Column -->
+                    <!-- <ng-container matColumnDef="createdBy">
+                        <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> Created By </th>
+                        <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;"> {{element.createdBy}} </td>
+                    </ng-container> -->
+            
+                    <!-- dated Column -->
+                    <ng-container matColumnDef="dated">
+                        <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> Instance Id
+                        </th>
+                        <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;"> {{element.instance_id }} </td>
+                    </ng-container>
+            
+                    <!-- instance Column -->
+                    <ng-container matColumnDef="instance">
+                        <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> Start Date/Time
+                        </th>
+                        <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;">
+                            {{element.startDate | date:'shortDate'}} {{ element.startTime}}</td>
+                    </ng-container>
+            
+                    <!-- duration Column -->
+                    <ng-container matColumnDef="duration">
+                        <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> Duration </th>
+                        <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;"> {{element.timetaken}} </td>
+                    </ng-container>
+            
+                    <!-- status Column -->
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> Status </th>
+                        <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;"> {{element.status}} </td>
+                    </ng-container>
+            
+                    <!-- createdby Column -->
+                    <ng-container *ngIf="userRole!='BUSINESS'" matColumnDef="createdby">
+                        <th mat-header-cell *matHeaderCellDef style="width: 10%;text-align: left; color: #2368a0;"> Executed By </th>
+                        <td mat-cell *matCellDef="let element" style="width: 10%;text-align: left;"> {{element.createdby | uppercase }} </td>
+                    </ng-container>
+            
+            
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef style="width: 10%;text-align: center; color: #2368a0;"> Job Log </th>
+                        <td mat-cell *matCellDef="let element" style="width: 10%;text-align: center;">
+                            <button mat-icon-button color="primary" matTooltip="View" matTooltipPosition="above"
+                                (click)="selectedInstance=element; monitoringModel(monitoringDialog)">
+                                <mat-icon>description</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+            
+                    <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
+                    <tr mat-row *matRowDef="let row; columns: tableHeaders;"></tr>
+                </table>
+            </div>
+            <!-- [pageSizeOptions]="[5, 10, 20]" -->
+            <img *ngIf="tableLoader" src="../assets/loader.gif" class="loader">
+            <mat-paginator #MonitorPageinator="matPaginator" [hidePageSize]=true [pageSize]="10" showFirstLastButtons>
+            </mat-paginator>
+            <!-- </div> -->
+        </mat-tab>
+
+        <mat-tab label="Record Count">
+            <br><br>
+            <div class="table-responsive" >
+                <table mat-table [dataSource]="fetchedData">
+            
+                    <!-- S.No Column -->
+                    <ng-container matColumnDef="#">
+                        <th mat-header-cell *matHeaderCellDef style="width: 5%;text-align: left; color: #2368a0;"> # </th>
+                        <td mat-cell *matCellDef="let element; let i = index;" style="width: 5%;text-align: left;">
+                            {{(this.fetchedData.paginator.pageIndex * this.fetchedData.paginator.pageSize)+ i+1}} </td>
+                    </ng-container>
+                    <!-- jobName Column -->
+                    <ng-container matColumnDef="jobName">
+                        <th mat-header-cell *matHeaderCellDef style="width: 20%;text-align: left; color: #2368a0;"> Job Name </th>
+                        <td mat-cell *matCellDef="let element" style="width: 20%;text-align: left;"> {{element.jobName | uppercase }}
+                        </td>
+                    </ng-container>
+                    <!-- instanceid Column -->
+                    <ng-container matColumnDef="instanceid">
+                        <th mat-header-cell *matHeaderCellDef style="width: 20%;text-align: left; color: #2368a0;"> Instance Id </th>
+                        <td mat-cell *matCellDef="let element" style="width: 20%;text-align: left;"> {{element.instanceid }}
+                        </td>
+                    </ng-container>
+                    <!-- recordsFromURL Column -->
+                    <ng-container matColumnDef="recordsFromURL">
+                        <th mat-header-cell *matHeaderCellDef style="width: 20%;text-align: left; color: #2368a0;"> Records From Source </th>
+                        <td mat-cell *matCellDef="let element" style="width: 20%;text-align: left;"> {{element.recordsFromURL}}
+                        </td>
+                    </ng-container>
+                    <!-- recordsFromDb Column -->
+                    <ng-container matColumnDef="recordsFromDb">
+                        <th mat-header-cell *matHeaderCellDef style="width: 20%;text-align: left; color: #2368a0;"> Records To Target </th>
+                        <td mat-cell *matCellDef="let element" style="width: 20%;text-align: left;"> {{element.recordsFromDb}}
+                        </td>
+                    </ng-container>
+                    <!-- time Column -->
+                    <ng-container matColumnDef="time">
+                        <th mat-header-cell *matHeaderCellDef style="width: 20%;text-align: left; color: #2368a0;"> Start Time </th>
+                        <td mat-cell *matCellDef="let element" style="width: 20%;text-align: left;"> {{element.time}}
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="fetchedTableHeader"></tr>
+                    <tr mat-row *matRowDef="let row; columns: fetchedTableHeader;"></tr>
+                </table>
+            </div>
+            <!-- <div class="table-responsive" *ngIf="fetchedShow">
+                <mat-table [dataSource]="fetchedData" matSort>
+                    <ng-container *ngFor="let column of fetchedTableHeader" matColumnDef="{{column}}" sticky>
+                        <mat-header-cell *matHeaderCellDef style="color: #2368a0;"> {{ column }} </mat-header-cell>
+                        <mat-cell *matCellDef="let object"> {{ object[column]!=''? object[column] : '-'}} </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="fetchedTableHeader"></mat-header-row>
+                    <mat-header-row mat-row *matRowDef="let row; columns: fetchedTableHeader;">
+                    </mat-header-row>
+                </mat-table>
+            </div> -->
+            <img *ngIf="!fetchedShow" src="../assets/loader.gif" class="loader">
+            <mat-paginator #FetchedPageinator="matPaginator" [hidePageSize]=true [pageSize]="10" showFirstLastButtons>
+            </mat-paginator>
+        </mat-tab>
+    </mat-tab-group>
+
+
+</mat-card>
+
+
+<ng-template #monitoringDialog >
+    <span>
+        <button style="float:right;" class="close" mat-button matDialogClose ><mat-icon>close</mat-icon></button>
+    </span>
+    <h2 matDialogTitle style="text-align: center;"><b> {{ selectedInstance.job_Name }} Job</b></h2>
+    <mat-dialog-content >
+        <img *ngIf="logLoader" src="../assets/loader.gif" class="loader">
+        <p *ngFor="let log of fullLogs; let i = index">
+            {{i+1}}. {{log.Date}} : {{log.message}}
+        </p>
+    </mat-dialog-content>
+</ng-template>
+
+<!-- 
+<div class="overlay-loader">
+    <div class="text">
+        <p> Job execution is going on...! </p>
+        <img src="https://help.miraclesoft.com/as   sets/images/Loader.gif" class="img-responsive" alt="loader">
+    </div>
+</div> -->

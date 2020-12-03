@@ -1,0 +1,211 @@
+<mat-card>
+    <div class="page-title">
+        <h2>User Management</h2>
+    </div>
+    <mat-grid-list cols="6" rowHeight="90px">
+        <mat-grid-tile colspan="2">
+            <div class="form-container">
+                <mat-form-field  appearance="outline">
+                    <mat-label>Search</mat-label>
+                    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off"
+                        (keyup)="applyFilter()">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"
+                        (click)="onSearchClear()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3"></mat-grid-tile>
+        <mat-grid-tile colspan="1" *ngIf="userRole=='ADMIN'">
+            <div class="form-container jobcreate">
+                <button mat-raised-button color="primary" (click)="userModel(userDialog, 'Add')" style="margin-right: 7px;">
+                    <mat-icon>add</mat-icon> User
+                </button>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <div class="table-responsive">
+        <table mat-table [dataSource]="userTableData">
+    
+            <!-- S.No Column -->
+            <ng-container matColumnDef="#">
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;text-align: center; color: #2368a0;"> # </th>
+                <td mat-cell *matCellDef="let element; let i = index;" style="width: 5%;text-align: center;">
+                    {{(this.userTableData.paginator.pageIndex * this.userTableData.paginator.pageSize)+ i+1}} </td>
+            </ng-container>
+    
+            <!-- Id Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;text-align: center; color: #2368a0;"> Id </th>
+                <td mat-cell *matCellDef="let element; let i = index;" style="width: 5%;text-align: center;">
+                    {{ element.id }} </td>
+            </ng-container>
+    
+            <!-- firstname Column -->
+            <ng-container matColumnDef="firstname">
+                <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> First Name </th>
+                <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;"> {{element.firstname | titlecase }} </td>
+            </ng-container>
+    
+            <!-- lastname Column -->
+            <ng-container matColumnDef="lastname">
+                <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> Last Name </th>
+                <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;"> {{element.lastname | titlecase }} </td>
+            </ng-container>
+    
+            <!-- email Column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef style="width: 20%;text-align: left; color: #2368a0;"> Email Id </th>
+                <td mat-cell *matCellDef="let element" style="width: 20%;text-align: left;"> {{element.email}} </td>
+            </ng-container>
+    
+            <!-- username Column -->
+            <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> User Name </th>
+                <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;"> {{element.username | titlecase }} </td>
+            </ng-container>
+    
+            <!-- userrole Column -->
+            <ng-container matColumnDef="userrole">
+                <th mat-header-cell *matHeaderCellDef style="width: 10%;text-align: left; color: #2368a0;"> User Role </th>
+                <td mat-cell *matCellDef="let element" style="width: 10%;text-align: left;"> {{element.roles[0].name}} </td>
+            </ng-container>
+    
+            <ng-container *ngIf="true" matColumnDef="actions">
+                <!-- <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>  -->
+                <th mat-header-cell *matHeaderCellDef style="width: 15%; text-align: center; color: #2368a0;"> Actions </th>
+                <!-- <mat-cell *matCellDef="let row"> -->
+                <td mat-cell *matCellDef="let element" style="width: 15%; text-align: center;">
+                    <button mat-icon-button (click)="selectedUserData=element; userModel(userDialog, 'Reset Password')">
+                        <mat-icon matTooltip="Reset Password" matTooltipPosition="above">rotate_left</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="selectedUserData=element; userModel(userDialog, 'Edit')">
+                        <mat-icon matTooltip="Edit" matTooltipPosition="above">edit_outline</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn"
+                        (click)="selectedUserData=element; userModel(userDeleteDialog, 'Delete')">
+                        <mat-icon matTooltip="Delete" matTooltipPosition="above">delete_outline</mat-icon>
+                    </button>
+    
+                    <!-- RotateLeft -->
+                    <!-- <a mat-flat-button color="primary" >
+                                <mat-icon>edit</mat-icon>
+                              </a> -->
+                </td>
+                <!-- </mat-cell> -->
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
+            <tr mat-row *matRowDef="let row; columns: tableHeaders;"></tr>
+        </table>
+    </div>
+    <img *ngIf="tableLoader" src="../assets/loader.gif" class="loader">
+    <mat-paginator #UserPageinator="matPaginator" [hidePageSize]=true [pageSize]="10" showFirstLastButtons></mat-paginator>
+
+</mat-card>
+
+
+
+
+<ng-template #userDialog>
+    <span>
+        <button style="float:right;" class="close" mat-button matDialogClose ><mat-icon>close</mat-icon></button>
+    </span>
+    
+    <h2 matDialogTitle style="text-align: center;"><b>{{ modelTitle }} User </b></h2>
+    <form [formGroup]="userForm">
+        <mat-dialog-content>
+            <mat-grid-list cols="2" rowHeight="90px">
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field [hideRequiredMarker]="false" [floatLabel]="auto" appearance="outline">
+                            <mat-label> First Name </mat-label>
+                            <input matInput formControlName="firstname" placeholder="Enter First Name"  cdkFocusInitial>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput formControlName="lastname" placeholder="Enter Last Name" >
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label> User Name </mat-label>
+                            <input matInput formControlName="username" placeholder="Enter User Name" >
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label> Email </mat-label>
+                            <input matInput formControlName="email" placeholder="Enter Email" >
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label> Password </mat-label>
+                            <input matInput required [type]="hide ? 'password' : 'text'" placeholder="Enter Password" formControlName="password">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label> Role </mat-label>
+                            <mat-select formControlName="role">
+                                <mat-option value="ADMIN">Admin</mat-option>
+                                <mat-option value="BUSINESS">Business</mat-option>
+                                <mat-option value="DEVELOPER">Developer</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <!-- <div class="form-container"> -->
+                        <section>
+                            <mat-checkbox  formControlName="alerts" >Send User Login info via Email</mat-checkbox>
+                        </section>
+                    <!-- </div> -->
+                </mat-grid-tile>
+                
+            </mat-grid-list>
+
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button [disabled]="!userForm.valid" mat-raised-button matDialogClose color="primary"
+                (click)=addUpdateUser(modelTitle)>Submit</button>
+        </mat-dialog-actions>
+    </form>
+</ng-template>
+
+<ng-template #userDeleteDialog>
+    <span>
+        <button style="float:right;" class="close" mat-button matDialogClose>
+            <mat-icon>close</mat-icon>
+        </button>
+    </span>
+    <h1 mat-dialog-title style="text-align: center;"> <b>{{ modelTitle }} </b></h1>
+    <div mat-dialog-content style="text-align: center;">
+        <p>Are you sure, you want to {{ modelTitle | lowercase }} <b>{{ selectedUserData.username+'?' }} </b></p>
+    </div>
+    <br><br>
+
+    <div mat-dialog-actions align="center">
+        <button mat-raised-button [mat-dialog-close]="" color="primary" (click)="deleteUser()"> Yes</button>
+        <button mat-raised-button matDialogClose color="warn" cdkFocusInitial>No</button>
+    </div>
+</ng-template>

@@ -1,0 +1,72 @@
+<mat-sidenav-container fullscreen >
+    <mat-sidenav mode="side" #sidenav opened position="start">
+        <span>
+            <!-- <img src="././assets/miracle-logo-white.svg" class="logo-img">  -->
+            <div class="center" style="font-size: 22px; font-weight: bold;"> 
+                <!-- ELEKTRA  -->
+                <span>
+                    <!-- /Blue with Gold border.svg -->
+                    <img src="././assets/Gold.png" class="logo">
+                </span>
+            </div>
+        </span>
+        <!-- margin-top: 20px; -->
+        <mat-divider style="color: #eee;"></mat-divider><br>
+        <mat-nav-list class="side-nav">
+            <!-- <h2 matSubheader>Pages</h2> -->
+            <!-- [ngStyle]="{'background-color': item.active ? 'blue' : 'black !important'}" -->
+            <a *ngFor="let item of menuList" mat-list-item routerLinkActive="active-list-item" [routerLink]=[item.path] >
+                <span>{{item.title}}</span>
+                <mat-icon color="#8c8c8c"> {{item.icon}} </mat-icon>
+            </a>
+        </mat-nav-list>
+        
+        <div class="logo-img">
+            <mat-divider style="color: #eee;"></mat-divider><br>
+            <span>
+                <img src="././assets/miracle-logo-white.svg" class="logo">
+            </span>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar class="bg-black">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span class="toolbar-spacer"></span>
+
+            <mat-card class="example-card">
+                <mat-card-header [matMenuTriggerFor]="menu">
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{ userFullName | titlecase }} </mat-card-title>
+                    <mat-icon style="margin-top: 12px;color:#fff">arrow_drop_down</mat-icon>
+                </mat-card-header>
+            </mat-card>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                    <mat-icon>person_outline</mat-icon>
+                    Profile
+                </button>
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>exit_to_app</mat-icon>
+                    Sign out
+                </button>
+            </mat-menu>
+        </mat-toolbar>
+
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+
+        <footer>
+            <div>
+                <p class="copyright text-center">
+                    &copy; {{currentDate | date: 'yyyy'}} <a href="http://www.miraclesoft.com"><b
+                            style="font-weight:600"> Miracle Software Systems, <span>Inc</span></b></a>.
+                </p>
+
+            </div>
+        </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

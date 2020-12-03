@@ -1,0 +1,269 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0;font-family: 'Montserrat',sans-serif; }
+
+
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+mat-sidenav {
+    width: 250px;
+    padding:15px;
+}
+.mat-drawer { 
+    background-color: #575757;
+    color:#fff
+}
+.main-content {
+    padding:20px;
+    /* background-color: #00A6B2; 
+    background-image: linear-gradient(#47aab3, #0D5285); */
+    /* height: max-content; */
+    /* min-height: max-content; */
+    /* margin: 0px auto 50px; */
+    
+}
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+/* filter controls */
+/* .search-div{
+    margin: 10px;
+      }
+      .search-form-field{
+          width: 70%;
+          margin-left: 0px;
+          margin-right: 10px;
+          padding:5px 10px;
+          background-color: #f5f5f5;
+          border-radius: 5px;
+         height: 40px;
+         margin-top:-15px;
+          }
+          .search-form-field div.mat-form-field-underline {
+              display: none;
+          }
+          .search-form-field div.mat-form-field-infix{
+              border-top: 0px;
+              margin-top: 4px;
+          }
+          .search-form-field div.mat-form-field-wrapper{
+            padding-bottom: 0px;
+        }
+        .search-form-field div.mat-form-field-suffix button{
+            height: 32px;
+            width: 32px;
+        } */
+/* .mat-paginator-page-size{
+    display: none !important;
+  } */
+  /* .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.5em 0 1em 0;
+  } */
+
+ /* .jobcreate .mat-primary{
+      background-color: #00aae7;
+  }
+  .systemcreate .mat-primary{
+    background-color: #00aae7;
+} */
+.mat-list-item-content .mat-icon{
+  color: rgba(0, 0, 0, 0.5) !important;
+  font-size:23px !important;
+  }
+/* input.mat-input-element::placeholder{
+    color:#00aae7
+} */
+/* button.mat-menu-item{
+    height: 40px;;
+  }*/
+  .mat-menu-content:not(:empty){
+    padding:0px;
+  }
+ .mat-button-wrapper{
+     font-size:16px
+ }
+
+table {
+    width: 100%;
+}
+
+.form-container {
+    display: flex; 
+    flex-direction: column;
+    width: 100%;
+    padding: 5px !important;
+}
+.form-container mat-icon{
+    font-size:23px;
+  }
+
+.mat-header-cell {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 16px;
+}
+  
+.mat-success{
+    color:#4cae4c
+}
+/* 
+.mat-primary{
+    background-color: #00aae7;
+} */
+.cdk-overlay-connected-position-bounding-box{
+    position: absolute !important;
+    width: 130px !important;
+    height: 100px;
+  }
+
+  .mat-dialog-content::-webkit-scrollbar {
+    width: 11px;
+  }
+  .mat-dialog-content {
+    scrollbar-width: 12px;
+    scrollbar-color: #00aae7;
+
+  }
+  .mat-dialog-content::-webkit-scrollbar-track {
+    background: #eee;
+    scrollbar-width: 12px;
+    border-radius: 10px;
+  }
+  .mat-dialog-content::-webkit-scrollbar-thumb {
+    background-color: #8c8c8c ;
+    border-radius: 10px;
+    border: 3px solid #8c8c8c;
+  }
+
+.close{
+  /* margin-top: -12px; */
+  margin-right: -20px !important;
+}
+
+  .page-title h2, .page-title h1{
+    color:#2368a0;
+    /* text-transform: uppercase; */
+    font-weight: bold;
+    }
+    
+
+
+
+/* .internalMatGrid{ min-width:100%;} */
+
+
+
+
+
+/* dashboard */
+
+.mat-menu-panel { min-width: 142px !important; } 
+
+.active-list-item {
+  background-color: #0d416b !important;
+  color:#ffffff !important;
+}
+.active-list-item span {
+  
+  color:#ffffff !important;
+}
+.active-list-item .mat-icon {
+ 
+  color:#ffffff !important;
+}
+
+/* CS */
+
+.mat-autocomplete-panel.mat-autocomplete-visible {
+  visibility: visible;
+  min-width: fit-content !important;
+}
+
+/* pre-loader */
+
+.loader {
+  display: block;
+  /* margin-left: auto;
+  margin-right: auto; */
+  /* margin-top: 200px; */
+  margin: 0px auto;
+  height: 100px;
+  z-index: 10;
+  position: relative;
+}
+
+
+/* pre-loader with background */
+.overlay-loader {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  transition: .5s ease;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: 99999;
+  }
+  
+  .text {
+  color: rgb(247, 247, 247);
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  }
+  /* pre-loader with background */
+
+  /* Table responsive */
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-responsive .mat-table {
+  width: 99%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  display: table;
+  border-collapse: collapse;
+  margin: 0px;
+}
+
+.table-responsive .mat-row .mat-header-row {
+display: table-row;
+overflow-x: auto;
+}
+
+.table-responsive .mat-cell .mat-header-cell {
+word-wrap: initial;
+display: table-cell;
+padding: 0px 5px;
+line-break: unset;
+width: auto;
+white-space: nowrap;
+overflow: auto;
+vertical-align: middle;
+}
+
+/* Table responsive */
+
+
+.mat-tab-label, .mat-tab-link {
+  color: #2368a0 !important;
+}
+
+/* .mat-input-element {
+  text-transform: uppercase !important;
+} */
+
+.inputUppercase {
+  text-transform: uppercase !important;
+}

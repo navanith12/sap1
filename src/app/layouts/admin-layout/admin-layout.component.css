@@ -1,0 +1,176 @@
+body{
+  margin: 0px auto;
+  width: 100%;
+  
+}
+    .bg-blue{
+        background-color: #232527;
+        /* 0d416b */
+        }
+        .bg-black{
+          background-color: #00aae7;
+          color:#fff;
+        }
+        
+          .center{
+            text-align: center;
+            color:#ffffff;
+            
+        }
+      
+        .mat-drawer.mat-drawer-side{
+            /* background-color: #0d416b !important; */
+            background: #2368a0; /* For browsers that do not support gradients */
+            background-image: linear-gradient(#00aae7,#0d416b);
+            color:#fff !important;
+          }
+          .mat-list-item-content,.mat-list-base .mat-list-item{
+            color:#fff !important;
+            /* padding-left: 1rem; */
+            margin-bottom: 5px;
+            background: #eeeeee;
+          }
+          .mat-list-item-content:hover,.mat-list-base .mat-list-item:hover{
+            background: #fff;
+            color: #FFF !important;
+            }
+          
+          .mat-list-item-ripple .mat-icon{
+            color: #8c8c8c !important;
+          font-size:23px !important;
+          }
+          
+    .mat-list-item span{
+      width: 165px;
+        /* text-align: center; */
+        /* font-weight: bold;   */
+        color: #000000;
+    }
+    .logo{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 156px;
+    }
+        .logo-img{
+            display: block;
+            padding: 0px 16px;
+            width: 220px;
+            position: fixed;
+            bottom: 30px;
+            left: 0;
+            /* margin: 0px auto; */
+    
+            /* margin-left: 15px !important;
+            margin-top: 10px;
+              padding-left:1rem;
+              padding-right: 1rem; */
+            
+          }
+          .mat-toolbar-row{
+            padding-left: 0px !important;
+            
+          }
+          
+    
+    .bg-black .mat-icon-button .mat-icon{
+        /* color: #fff; */
+        font-size:25px;
+    }
+          
+    ul li {
+      list-style: none;
+     
+    }
+  .mat-menu-content:not(:empty){
+      padding:0px;
+    }
+    .cdk-overlay-pane .mat-menu-panel,button.mat-menu-item{
+      height: 40px;
+    }
+
+    /* .mat-menu-item .mat-icon:hover{
+      color:#fff !important;
+    } */
+    .mat-menu-item .mat-icon{
+      margin-right: 5px !important;
+    }
+    
+    footer {
+      padding: 15px;
+      text-align: center;
+      background-color: #0d416b;
+      color: #ffffff;
+      /* width: 100%; */
+      left:0;
+      bottom:0;
+      position: fixed;
+      width: 100%;
+      z-index: 5;
+      /* margin-top: 50px !important; */
+      
+      }      
+      footer a{
+        text-decoration: none;
+        color: #ffffff;
+      }
+      p {
+      font-size:16px;
+      color: #fff;
+      /* padding:10px; */
+      margin-block-start: 0em !important;
+      margin-block-end: 0em !important;
+      } 
+      /* .example-header-image {
+        background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+        background-size: cover;
+      }
+      .mat-card-avatar {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        object-fit: cover;
+    } */
+    .mat-drawer-content {
+      /* height: auto !important; */
+      overflow-x: hidden !important;
+    }
+    .bg-black .example-card {
+      max-width: 200px;
+    }
+    
+    .example-header-image {
+      background-image: url('/assets/human_icon.png');
+      background-size: cover;
+      margin-top: 5px;
+      }
+      
+    .bg-black .mat-card{
+      background: none !important;
+      columns: #000000;;  
+        
+    }
+    .bg-black .mat-card-header .mat-card-title{
+      font-size :16px !important;
+      margin-top:9px;
+      color:#fff;
+      }
+      .mat-card-header{
+        margin-left: 0px;
+      }
+    .bg-black .mat-card:not([class*=mat-elevation-z]) {
+      box-shadow: none !important;
+    }
+	
+   /* .side-nav .active-list-item .mat-list-item-content .mat-ripple:active {
+      background-color: #3F51B5 !important; 
+    }
+
+    .side-nav .active-list-item:focus {
+      background-color: #3F51B5 !important; 
+    }*/
+
+    /* .side-nav .active-list-item:visited {
+      background-color: #3F51B5 !important; 
+    } */

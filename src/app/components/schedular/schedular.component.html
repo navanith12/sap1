@@ -1,0 +1,255 @@
+<mat-card>
+    <div class="page-title">
+        <h2>Scheduling</h2>
+    </div>
+    <mat-grid-list cols="6" rowHeight="90px">
+        <mat-grid-tile colspan="3">
+            <div class="form-container">
+                <mat-form-field  appearance="outline">
+                    <mat-label>Search</mat-label>
+                    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off"
+                        (keyup)="applyFilter()">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"
+                        (click)="onSearchClear()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1">
+            <div class="form-container">
+                <mat-form-field [hideRequiredMarker]="true" appearance="outline">
+                    <mat-label>
+                        Job Type
+                    </mat-label>
+                    <mat-select required [(ngModel)]="tableType" (ngModelChange)="changeTableType()">
+                        <mat-option *ngFor="let table of tableTypeList" [value]="table.value"> {{ table.name }} </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1">
+            <div class="form-container">
+                <button mat-raised-button color="primary" (click)="schedularModel(schedularDialog, 'Create');">
+                    <mat-icon>add</mat-icon>New Schedule
+                </button>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1">
+            <div class="form-container">
+                <button mat-raised-button color="primary" (click)="changeTableType();">
+                    <mat-icon>sync</mat-icon>Sync
+                </button>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <div class="table-responsive">
+        <table mat-table [dataSource]="scheduleList">
+    
+            <!-- S.No Column -->
+            <ng-container matColumnDef="#">
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;text-align: left; color: #2368a0;"> # </th>
+                <td mat-cell *matCellDef="let element; let i = index;" style="width: 5%;text-align: left;">
+                    {{(this.scheduleList.paginator.pageIndex * this.scheduleList.paginator.pageSize)+ i+1}} </td>
+            </ng-container>
+    
+            <!-- jobName Column -->
+            <ng-container matColumnDef="jobName">
+                <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> Schedule Name
+                </th>
+                <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;"> {{element.jobName | uppercase}}
+                </td>
+            </ng-container>
+    
+            <!-- jobId Column -->
+            <ng-container matColumnDef="jobId">
+                <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> Job Name </th>
+                <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;"> {{element.jobId | uppercase}}
+                </td>
+            </ng-container>
+    
+            <!-- frequency Column -->
+            <ng-container matColumnDef="frequency">
+                <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> Frequency </th>
+                <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;">
+                    {{element.frequency  | uppercase}} </td>
+            </ng-container>
+    
+            <!-- scheduledDate Column -->
+            <ng-container matColumnDef="scheduledDate">
+                <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> Next Run Date
+                </th>
+                <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;">
+                    {{element.scheduledDate | date:'short'}} </td>
+            </ng-container>
+    
+            <!-- status Column -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> Status </th>
+                <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;"> {{element.status  | uppercase}}
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: center; color: #2368a0;"> Actions </th>
+                <td mat-cell *matCellDef="let element" style="width: 15%;text-align: center;">
+                    <button mat-icon-button color="success"
+                        (click)="selectedScheduleData=element; schedularModel(schedularExecDeleteDialog, 'Execute')">
+                        <mat-icon matTooltip="Execute" matTooltipPosition="above">play_arrow</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Edit" matTooltipPosition="above"
+                        (click)="selectedScheduleData=element; schedularModel(schedularDialog, 'Edit')">
+                        <mat-icon>edit_outline</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn"
+                        (click)="selectedScheduleData=element; schedularModel(schedularExecDeleteDialog, 'Delete')">
+                        <mat-icon matTooltip="Delete" matTooltipPosition="above">delete_outline</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
+            <tr mat-row *matRowDef="let row; columns: tableHeaders;"></tr>
+    
+        </table>
+    </div>
+    <img *ngIf="loader" src="../assets/loader.gif" class="loader">
+    <mat-paginator [hidePageSize]=true [pageSize]="10" showFirstLastButtons></mat-paginator>
+
+</mat-card>
+
+
+<ng-template #schedularDialog>
+    <span>
+        <button style="float:right;" class="close" mat-button matDialogClose>
+            <mat-icon>close</mat-icon>
+        </button>
+    </span>
+    <h2 matDialogTitle style="text-align: center;"><b>{{ modelTitle }} Schedule </b></h2>
+    <form [formGroup]="scheduleForm">
+        <mat-dialog-content>
+            <mat-grid-list cols="2" rowHeight="90px">
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field [hideRequiredMarker]="false" appearance="outline">
+                            <mat-label> Job Type </mat-label>
+                            <mat-select required formControlName="jobType" cdkFocusInitial
+                                (ngModelChange)="getJobsList(scheduleForm.value.jobType)" [disabled]="modelTitle=='Create'? false : true">
+                                <mat-option *ngFor="let table of tableTypeList" [value]="table.value"> {{ table.name }} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Schedule Name</mat-label>
+                            <input matInput formControlName="scheduleName" placeholder="Enter Schedule Name" [readonly]="modelTitle=='Create'? false : true">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Job Name</mat-label>
+                            <mat-select required formControlName="jobId" [disabled]="modelTitle=='Create'? false : true">
+                                <mat-option *ngFor="let job of jobsList" [value]="job.name">{{ job.name | uppercase }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label> Frequency </mat-label>
+                            <mat-select required formControlName="frequency" (ngModelChange)="changeFrequency1()">
+                                <mat-option value="once">One Time</mat-option>
+                                <mat-option value="moreThanOne">More than one time</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" *ngIf="scheduleForm.value.frequency=='once'">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label> Next Run Date </mat-label>
+                            <input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Next Run Date"
+                                formControlName="nextRunDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1" *ngIf="scheduleForm.value.frequency=='once'">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label> Hour </mat-label>
+                            <!-- <input matInput type="number" min="0" max="23" formControlName="nextRunDate1"> -->
+                            <mat-select required formControlName="hour" placeholder="Enter Hour">
+                                <mat-option *ngFor="let item of generateArray(24); let i = index;" [value]="i"> {{i}}
+                                </mat-option>
+                            </mat-select>
+
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>:
+                <mat-grid-tile colspan="1" *ngIf="scheduleForm.value.frequency=='once'">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label> Minute </mat-label>
+                            <!-- <input matInput type="number" min="0" max="59" formControlName="nextRunDate1"> -->
+                            <mat-select required formControlName="minute" placeholder="Enter Minute">
+                                <mat-option *ngFor="let item of generateArray(60); let i = index;" [value]="i"> {{i}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile *ngIf="modelTitle=='Edit' || modelTitle=='View'" colspan="1">
+                    <div class="form-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Created By</mat-label>
+                            <input matInput readonly required placeholder="Enter Created By"
+                                formControlName="createdBy">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+            </mat-grid-list>
+
+            <div *ngIf="scheduleForm.value.frequency=='moreThanOne'">
+                <cron-editor formControlName="cronForm" [options]="cronOptions" standalone='false'></cron-editor>
+                <!-- {{ scheduleForm.value.cronForm}} -->
+
+            </div>
+
+        </mat-dialog-content>
+        <mat-dialog-actions align="end" style="margin-top: 5px;">
+            <button [disabled]="!scheduleForm.valid" mat-raised-button matDialogClose color="primary"
+                (click)=addUpdateSchedule(modelTitle) style="margin-right: 7px;">Submit</button>
+        </mat-dialog-actions>
+    </form>
+</ng-template>
+
+<ng-template #schedularExecDeleteDialog>
+    <span>
+        <button style="float:right;" class="close" mat-button matDialogClose>
+            <mat-icon>close</mat-icon>
+        </button>
+    </span>
+    <h1 mat-dialog-title style="text-align: center;"> <b>{{ modelTitle }} </b></h1>
+    <div mat-dialog-content style="text-align: center;">
+        <p>Are you sure, you want to {{ modelTitle | lowercase }} <b>{{ selectedScheduleData.jobName+'?' }} </b></p>
+    </div>
+    <br><br>
+
+    <div mat-dialog-actions align="center">
+        <button mat-raised-button matDialogClose color="primary" *ngIf="modelTitle=='Delete'"
+            (click)="deleteSchedule()"> Yes</button>
+        <button mat-raised-button matDialogClose color="primary" *ngIf="modelTitle=='Execute'"
+            (click)="executeSchedule()"> Yes</button>
+        <button mat-raised-button matDialogClose color="warn" cdkFocusInitial>No</button>
+    </div>
+</ng-template>

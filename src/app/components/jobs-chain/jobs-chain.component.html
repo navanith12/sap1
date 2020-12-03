@@ -1,0 +1,161 @@
+<mat-card>
+    <div class="page-title">
+        <h2>Job Chain</h2>
+    </div>
+    <mat-grid-list cols="4" rowHeight="90px">
+        <!-- <mat-grid-tile colspan="1">
+            <div class="form-container">
+                <mat-form-field [hideRequiredMarker]="true" appearance="outline">
+                    <mat-label> Job Type </mat-label>
+                    <mat-select required [(ngModel)]="tableType" (ngModelChange)="tableTypeChange()">
+                        <mat-option *ngFor="let table of tableTypeList" [value]="table.value"> {{ table.name }} </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile> -->
+        <mat-grid-tile colspan="3">
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1">
+            <div class="form-container">
+                <button mat-raised-button color="primary" (click)="jobchainModel(jobchainCreateViewEditDialog, 'Create');">
+                    <mat-icon>add</mat-icon>New Job Chain
+                </button>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <div class="table-responsive" >
+        <table mat-table [dataSource]="jobchainTable">
+            <ng-container matColumnDef="#">
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;text-align: left; color: #2368a0;"> # </th>
+                <td mat-cell *matCellDef="let element; let i = index;" style="width: 5%;text-align: left;">
+                    {{(this.jobchainTable.paginator.pageIndex * this.jobchainTable.paginator.pageSize)+ i+1}} </td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef style="width: 20%;text-align: left; color: #2368a0;"> Job Name </th>
+                <td mat-cell *matCellDef="let element" style="width: 20%;text-align: left;"> {{element.name | uppercase }} </td>
+            </ng-container>
+            <ng-container matColumnDef="createdby">
+                <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> Created By </th>
+                <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;"> {{element.createdby | uppercase }} </td>
+            </ng-container>
+            <ng-container matColumnDef="createdAt">
+                <th mat-header-cell *matHeaderCellDef style="width: 15%;text-align: left; color: #2368a0;"> Created On </th>
+                <td mat-cell *matCellDef="let element" style="width: 15%;text-align: left;"> {{element.createdAt | date:'short' }} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center; color: #2368a0;"> Actions </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                    <button mat-icon-button color="success"
+                        (click)="selectedJobchainData=element; jobchainModel(jobChainDeleteExecuteDialog, 'Execute')">
+                        <mat-icon matTooltip="Execute" matTooltipPosition="above">play_arrow</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary"
+                        (click)="selectedJobchainData=element; jobchainModel(jobchainCreateViewEditDialog, 'View')">
+                        <mat-icon matTooltip="View" matTooltipPosition="above">remove_red_eye</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="selectedJobchainData=element; jobchainModel(jobchainCreateViewEditDialog, 'Edit')">
+                        <mat-icon matTooltip="Edit" matTooltipPosition="above">edit_outline</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn"
+                        (click)="selectedJobchainData=element; jobchainModel(jobChainDeleteExecuteDialog, 'Delete')">
+                        <mat-icon matTooltip="Delete" matTooltipPosition="above">delete_outline</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="jobchainTableHeaders"></tr>
+            <tr mat-row *matRowDef="let row; columns: jobchainTableHeaders;"></tr>
+        </table>
+    </div>
+    <!-- <div *ngIf="true" class="overlay-loader">
+        <img  src="../assets/loader.gif" class="overlay-loader">
+    </div> -->
+    <img *ngIf="tableLoader" src="../assets/loader.gif" class="loader">
+    <mat-paginator #JobchainPageinator="matPaginator" [hidePageSize]=true [pageSize]="10" showFirstLastButtons></mat-paginator>
+   
+</mat-card>
+
+<ng-template #jobchainCreateViewEditDialog>
+    <span>
+        <button style="float:right;" class="close" mat-button matDialogClose>
+            <mat-icon>close</mat-icon>
+        </button>
+    </span>
+    <h2 matDialogTitle style="text-align: center;"><b> Job Chain {{ modelTitle }} </b></h2>
+    <mat-dialog-content>
+        <mat-grid-list cols="2" rowHeight="90px">
+            <mat-grid-tile colspan="1">
+                <div class="form-container">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Job Chain Name</mat-label>
+                        <input matInput required placeholder="Enter Job Chain Name" [(ngModel)]="jobchainName"
+                            [readonly]="jobchainNameDisable">
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" *ngIf="modelTitle!='View'">
+                <div class="form-container">
+                    <mat-form-field [hideRequiredMarker]="true" appearance="outline">
+                        <mat-label> Job Type </mat-label>
+                        <mat-select required [(ngModel)]="tableType" (ngModelChange)="tableTypeChange()">
+                            <mat-option *ngFor="let table of tableTypeList" [value]="table.value"> {{ table.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-grid-list cols="2" rowHeight="460px" *ngIf="modelTitle!='View'">
+            <mat-grid-tile colspan="1" >
+                <div class="form-container">
+                    <p style="text-align: center;"><b>Selected Job List </b></p>
+                    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="chainjobList"
+                        [cdkDropListConnectedTo]="[todoList]" class="dragdrop-list" (cdkDropListDropped)="drop($event)">
+                        <div class="dragdrop-box" *ngFor="let item of chainjobList" cdkDrag>{{item.name}}</div>
+                    </div>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1">
+                <div class="form-container">
+                    <p style="text-align: center;"><b> Job Pool </b></p>
+                    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="jobsList" [cdkDropListConnectedTo]="[doneList]"
+                        class="dragdrop-list" (cdkDropListDropped)="drop($event)">
+                        <div class="dragdrop-box" *ngFor="let item of jobsList" cdkDrag>{{item.name}}</div>
+                    </div>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="1" rowHeight="460px" *ngIf="modelTitle=='View'">
+            <mat-grid-tile colspan="1">
+                <div class="form-container">
+                    <p style="text-align: center;"><b>Selected Job List </b></p>
+                    <div class="dragdrop-list">
+                        <div class="dragdrop-box" *ngFor="let item of chainjobList">{{item.name}}</div>
+                    </div>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </mat-dialog-content>
+    <div mat-dialog-actions align="end" style="margin-top: 10px;">
+        <button *ngIf="modelTitle!='View'" mat-raised-button matDialogClose color="primary" [disabled]="(chainjobList.length==0 || jobchainName=='')" (click)="modelTitle=='Create' ? createJobchain() : updateJobchain()"> Submit </button>
+    </div>
+</ng-template>
+
+
+
+<ng-template #jobChainDeleteExecuteDialog>
+    <span>
+        <button style="float:right;" class="close" mat-button matDialogClose ><mat-icon>close</mat-icon></button>
+    </span>
+    <h1 mat-dialog-title style="text-align: center;"> <b>{{ modelTitle }} </b></h1>
+    <div mat-dialog-content style="text-align: center;">
+        <p>Are you sure, you want to {{ modelTitle | lowercase}} <b>{{ selectedJobchainData.name }} </b></p>
+    </div>
+    <br>
+    <div mat-dialog-actions align="center">
+        <button mat-raised-button matDialogClose color="primary" (click)="modelTitle=='Delete' ? deleteJobchain() : executeJobchain()">Yes</button>
+        <button mat-raised-button matDialogClose color="warn" cdkFocusInitial>No</button>
+    </div>
+</ng-template>
