@@ -1,0 +1,11 @@
+connection to sap web-service : successfull
+Data fetch from web-service : Initiated
+Date fetch from web-service : Completed
+Parallel process thread i initiated
+.....
+
+Internal Processing for Data fetched from parallel process i : Completed
+.......
+
+Inserting Data to data target by parallel process i : Completed
+

@@ -1,0 +1,1039 @@
+
+**** Error file opened at 20200805 100958 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error:     >Wed Aug 05 10:09:58,429<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=192.168.1.127 SYSNR=01 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '192.168.1.127:3301' not reached
+TIME        Wed Aug 05 10:09:58 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 192.168.1.127:3301
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     3
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Wed Aug 05 10:10:00,440<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=192.168.1.127 SYSNR=01 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '192.168.1.127:3301' not reached
+TIME        Wed Aug 05 10:10:00 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 192.168.1.127:3301
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     5
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20200806 174255 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Exception thrown [Thu Aug 06 17:42:55,451]: Parameter ABAP system number ('jco.client.sysnr') needs to be a two digit number string instead of '432'
+com.sap.conn.rfc.exceptions.RfcInvalidConfigurationException: Configuration of destination sap_system_without_pool is incorrect: Parameter ABAP system number ('jco.client.sysnr') needs to be a two digit number string instead of '432'
+	at com.sap.conn.rfc.api.RfcOptions.throwConfigurationException(RfcOptions.java:820)
+	at com.sap.conn.rfc.api.RfcOptions.checkSystemNumber(RfcOptions.java:285)
+	at com.sap.conn.rfc.api.RfcOptions.checkParameters(RfcOptions.java:357)
+	at com.sap.conn.jco.rt.MiddlewareJavaRfc$JavaRfcClient.initialize(MiddlewareJavaRfc.java:1109)
+	at com.sap.conn.jco.rt.MiddlewareJavaRfc$JavaRfcClient.connect(MiddlewareJavaRfc.java:1137)
+	at com.sap.conn.jco.rt.ClientConnection.connect(ClientConnection.java:713)
+	at com.sap.conn.jco.rt.RepositoryConnection.connect(RepositoryConnection.java:70)
+	at com.sap.conn.jco.rt.PoolingFactory.init(PoolingFactory.java:117)
+	at com.sap.conn.jco.rt.ConnectionManager.createFactory(ConnectionManager.java:441)
+	at com.sap.conn.jco.rt.DefaultConnectionManager.createFactory(DefaultConnectionManager.java:24)
+	at com.sap.conn.jco.rt.ConnectionManager.getFactory(ConnectionManager.java:391)
+	at com.sap.conn.jco.rt.RfcDestination.getSystemID(RfcDestination.java:1168)
+	at com.sap.conn.jco.rt.RepositoryManager.getRepository(RepositoryManager.java:28)
+	at com.sap.conn.jco.rt.RfcDestination.initRepository(RfcDestination.java:1122)
+	at com.sap.conn.jco.rt.RfcDestination.getRepository(RfcDestination.java:1276)
+	at com.sap.conn.jco.rt.DefaultDestinationManager.update(DefaultDestinationManager.java:296)
+	at com.sap.conn.jco.rt.DefaultDestinationManager.searchDestination(DefaultDestinationManager.java:395)
+	at com.sap.conn.jco.rt.DefaultDestinationManager.getDestinationInstance(DefaultDestinationManager.java:109)
+	at com.sap.conn.jco.JCoDestinationManager.getDestination(JCoDestinationManager.java:56)
+	at com.miraclesoft.datalake.jco.JcoSapConnector.getSourceDestination(JcoSapConnector.java:162)
+	at com.miraclesoft.datalake.mongo.service.SourceService.add(SourceService.java:25)
+	at com.miraclesoft.datalake.mongo.controller.SourceController.add(SourceController.java:29)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:879)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:113)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:113)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:126)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:90)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:158)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.miraclesoft.datalake.user.security.jwt.JwtAuthTokenFilter.doFilterInternal(JwtAuthTokenFilter.java:49)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:367)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1639)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+Exception thrown [Thu Aug 06 17:42:55,491]: Parameter ABAP system number ('jco.client.sysnr') needs to be a two digit number string instead of '432'
+com.sap.conn.rfc.exceptions.RfcInvalidConfigurationException: Configuration of destination sap_system_without_pool is incorrect: Parameter ABAP system number ('jco.client.sysnr') needs to be a two digit number string instead of '432'
+	at com.sap.conn.rfc.api.RfcOptions.throwConfigurationException(RfcOptions.java:820)
+	at com.sap.conn.rfc.api.RfcOptions.checkSystemNumber(RfcOptions.java:285)
+	at com.sap.conn.rfc.api.RfcOptions.checkParameters(RfcOptions.java:357)
+	at com.sap.conn.jco.rt.MiddlewareJavaRfc$JavaRfcClient.initialize(MiddlewareJavaRfc.java:1109)
+	at com.sap.conn.jco.rt.MiddlewareJavaRfc$JavaRfcClient.connect(MiddlewareJavaRfc.java:1137)
+	at com.sap.conn.jco.rt.ClientConnection.connect(ClientConnection.java:713)
+	at com.sap.conn.jco.rt.PoolingFactory.init(PoolingFactory.java:117)
+	at com.sap.conn.jco.rt.ConnectionManager.createFactory(ConnectionManager.java:441)
+	at com.sap.conn.jco.rt.DefaultConnectionManager.createFactory(DefaultConnectionManager.java:24)
+	at com.sap.conn.jco.rt.ConnectionManager.getFactory(ConnectionManager.java:391)
+	at com.sap.conn.jco.rt.RfcDestination.initialize(RfcDestination.java:1048)
+	at com.sap.conn.jco.rt.RfcDestination.ping(RfcDestination.java:1496)
+	at com.miraclesoft.datalake.mongo.service.SourceService.add(SourceService.java:26)
+	at com.miraclesoft.datalake.mongo.controller.SourceController.add(SourceController.java:29)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:879)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:113)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:113)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:126)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:90)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:158)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.miraclesoft.datalake.user.security.jwt.JwtAuthTokenFilter.doFilterInternal(JwtAuthTokenFilter.java:49)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:367)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1639)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+Error:     >Thu Aug 06 17:44:27,520<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=172.17.10.41 SYSNR=01 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '172.17.10.41:3301' not reached
+TIME        Thu Aug 06 17:44:27 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 172.17.10.41:3301
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Thu Aug 06 17:44:30,908<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=172.17.10.41 SYSNR=01 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '172.17.10.41:3301' not reached
+TIME        Thu Aug 06 17:44:30 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 172.17.10.41:3301
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     4
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Thu Aug 06 18:00:28,048<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=172.17.10.41 SYSNR=01 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '172.17.10.41:3301' not reached
+TIME        Thu Aug 06 18:00:28 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 172.17.10.41:3301
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Thu Aug 06 18:02:22,663<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=172.17.10.41 SYSNR=01 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '172.17.10.41:3301' not reached
+TIME        Thu Aug 06 18:02:22 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 172.17.10.41:3301
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Thu Aug 06 18:03:25,712<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=172.17.10.41 SYSNR=01 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '172.17.10.41:3301' not reached
+TIME        Thu Aug 06 18:03:25 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 172.17.10.41:3301
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     3
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20200807 102326 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error: [1]    >Fri Aug 07 10:23:26,705<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULA]:
+	message: >>>>>>>>>>> DB-Error -        129
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+	message class: 00
+	message number: 162
+	message parameter 0: DB-Error -
+	message parameter 1:        129
+
+Error: [1]    >Fri Aug 07 10:24:25,860<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULA]:
+	message: >>>>>>>>>>> DB-Error -        129
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+	message class: 00
+	message number: 162
+	message parameter 0: DB-Error -
+	message parameter 1:        129
+
+
+**** Error file opened at 20200807 202131 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error: [3]    >Fri Aug 07 20:21:31,832<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULA]:
+	message: >>>>>>>>>>> DB-Error -        129
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+	message class: 00
+	message number: 162
+	message parameter 0: DB-Error -
+	message parameter 1:        129
+
+
+**** Error file opened at 20200811 165235 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error: [2]    >Tue Aug 11 16:52:35,485<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULA]:
+	message: :00:162 DB-Error -        129      
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+	message class: 00
+	message number: 162
+	message parameter 0: DB-Error -
+	message parameter 1:        129
+
+Error: [1]    >Tue Aug 11 16:52:47,917<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULA]:
+	message: :00:162 DB-Error -        129      
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+	message class: 00
+	message number: 162
+	message parameter 0: DB-Error -
+	message parameter 1:        129
+
+Error: [2]    >Tue Aug 11 19:23:35,577<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULA]:
+	message: >>>>>>>>>>> DB-Error -        129
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+	message class: 00
+	message number: 162
+	message parameter 0: DB-Error -
+	message parameter 1:        129
+
+
+**** Error file opened at 20200826 163437 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error:     >Wed Aug 26 16:34:37,716<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=string SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       hostname 'string' unknown
+TIME        Wed Aug 26 16:34:37 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -2
+MODULE      D:/depot/bas/753_REL/src/base/ni/ninti.c
+LINE        898
+DETAIL      NiPGetHostByName: 'string' not found
+SYSTEM CALL getaddrinfo
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20200902 132136 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error:     >Wed Sep 02 13:21:36,049<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=172.17.10.41 SYSNR=01 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '172.17.10.41:3301' not reached
+TIME        Wed Sep 02 13:21:36 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 172.17.10.41:3301
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Wed Sep 02 13:25:54,444<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=172.17.10.41 SYSNR=02 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '172.17.10.41:3302' not reached
+TIME        Wed Sep 02 13:25:54 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 172.17.10.41:3302
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Wed Sep 02 15:01:23,090<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=172.17.10.41 SYSNR=02 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '172.17.10.41:3302' not reached
+TIME        Wed Sep 02 15:01:23 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 172.17.10.41:3302
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Wed Sep 02 16:03:22,006<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=172.17.10.41 SYSNR=01 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '172.17.10.41:3301' not reached
+TIME        Wed Sep 02 16:03:22 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 172.17.10.41:3301
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20200914 145320 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error: [3]    >Mon Sep 14 14:53:20,903<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Mon Sep 14 14:53:20,951<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error:     >Mon Sep 14 14:57:54,054<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=172.17.10.41 SYSNR=01 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '172.17.10.41:3301' not reached
+TIME        Mon Sep 14 14:57:54 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 172.17.10.41:3301
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Mon Sep 14 14:57:57,454<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=172.17.10.41 SYSNR=01 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '172.17.10.41:3301' not reached
+TIME        Mon Sep 14 14:57:57 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 172.17.10.41:3301
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     4
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+<<<<<<< HEAD
+=======
+
+**** Error file opened at 20200917 184802 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error: [2]    >Thu Sep 17 18:48:02,053<    RfcException raised by system [PUB|mssenterprise|01] for user [TEST]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Thu Sep 17 18:48:02,079<    RfcException raised by system [PUB|mssenterprise|01] for user [TEST]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [2]    >Thu Sep 17 18:48:03,106<    RfcException raised by system [PUB|mssenterprise|01] for user [TEST]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [2]    >Thu Sep 17 18:53:54,755<    RfcException raised by system [PUB|mssenterprise|01] for user [DFDS]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Thu Sep 17 18:53:54,774<    RfcException raised by system [PUB|mssenterprise|01] for user [DFDS]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [2]    >Thu Sep 17 18:53:55,832<    RfcException raised by system [PUB|mssenterprise|01] for user [DFDS]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [2]    >Fri Sep 18 09:59:33,077<    RfcException raised by system [PUB|mssenterprise|01] for user [QWERWE]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Fri Sep 18 09:59:33,098<    RfcException raised by system [PUB|mssenterprise|01] for user [QWERWE]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [2]    >Fri Sep 18 09:59:34,158<    RfcException raised by system [PUB|mssenterprise|01] for user [QWERWE]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [2]    >Fri Sep 18 10:05:11,043<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULAFSDAFSDF]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Fri Sep 18 10:05:11,061<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULAFSDAFSDF]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [2]    >Fri Sep 18 10:05:12,116<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULAFSDAFSDF]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+
+**** Error file opened at 20200918 110020 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error: [1]    >Fri Sep 18 11:00:20,800<    RfcException raised by system [PUB|mssenterprise|01] for user [SFAF]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [2]    >Fri Sep 18 11:00:20,818<    RfcException raised by system [PUB|mssenterprise|01] for user [SFAF]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Fri Sep 18 11:00:21,885<    RfcException raised by system [PUB|mssenterprise|01] for user [SFAF]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Fri Sep 18 11:18:46,542<    RfcException raised by system [PUB|mssenterprise|01] for user [DAF]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [2]    >Fri Sep 18 11:18:46,564<    RfcException raised by system [PUB|mssenterprise|01] for user [DAF]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Fri Sep 18 11:18:47,628<    RfcException raised by system [PUB|mssenterprise|01] for user [DAF]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Fri Sep 18 11:19:49,588<    RfcException raised by system [PUB|mssenterprise|01] for user [SFA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [2]    >Fri Sep 18 11:19:49,623<    RfcException raised by system [PUB|mssenterprise|01] for user [SFA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Fri Sep 18 11:19:50,666<    RfcException raised by system [PUB|mssenterprise|01] for user [SFA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [2]    >Fri Sep 18 11:20:11,036<    RfcException raised by system [PUB|mssenterprise|01] for user [SFA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Fri Sep 18 11:20:12,126<    RfcException raised by system [PUB|mssenterprise|01] for user [SFA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+
+**** Error file opened at 20200918 122210 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error: [1]    >Fri Sep 18 12:22:10,716<    RfcException raised by system [PUB|mssenterprise|01] for user [SAFDA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [2]    >Fri Sep 18 12:22:10,750<    RfcException raised by system [PUB|mssenterprise|01] for user [SAFDA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Fri Sep 18 12:22:11,793<    RfcException raised by system [PUB|mssenterprise|01] for user [SAFDA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+>>>>>>> 8e4264ae60054599312313000480e9689aeb50be
+
+**** Error file opened at 20200925 115655 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error: [1]    >Fri Sep 25 11:56:55,134<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+
+**** Error file opened at 20200925 120316 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error: [1]    >Fri Sep 25 12:03:16,951<    RfcException raised by system [PUB|mssenterprise|01] for user [GRORUKULA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Fri Sep 25 12:04:33,145<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUADS]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+
+**** Error file opened at 20200925 121426 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error: [2]    >Fri Sep 25 12:14:26,913<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Fri Sep 25 12:14:26,938<    RfcException raised by system [PUB|mssenterprise|01] for user [GKORUKULA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+
+**** Error file opened at 20201028 105950 Eastern Daylight Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error: [2]    >Wed Oct 28 10:59:50,884<    RfcException raised by system [BWS|serverbi|21] for user [GKORUKULA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+Error: [1]    >Wed Oct 28 10:59:50,921<    RfcException raised by system [BWS|serverbi|21] for user [GKORUKULA]:
+	message: Name or password is incorrect (repeat logon)
+	return code: RFC_SYS_EXCEPTION (3)
+	error group: 103
+	key: RFC_ERROR_LOGON_FAILURE
+
+
+**** Error file opened at 20201102 092549 Eastern Standard Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error:     >Mon Nov 02 09:25:49,764<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=192.168.1.108 SYSNR=21 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '192.168.1.108:3321' not reached
+TIME        Mon Nov 02 09:25:49 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 192.168.1.108:3321
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Mon Nov 02 09:25:52,138<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=192.168.1.108 SYSNR=21 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '192.168.1.108:3321' not reached
+TIME        Mon Nov 02 09:25:52 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 192.168.1.108:3321
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     4
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Mon Nov 02 09:27:59,034<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=192.168.1.108 SYSNR=21 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '192.168.1.108:3321' not reached
+TIME        Mon Nov 02 09:27:59 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 192.168.1.108:3321
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     4
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20201103 105018 Eastern Standard Time Rel. 3.1.2 (2019-10-02) [753.512]
+Error:     >Tue Nov 03 10:50:18,069<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=172.17.1.41 SYSNR=01 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '172.17.1.41:3301' not reached
+TIME        Tue Nov 03 10:50:18 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 172.17.1.41:3301
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Tue Nov 03 10:50:21,409<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=172.17.1.41 SYSNR=01 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '172.17.1.41:3301' not reached
+TIME        Tue Nov 03 10:50:21 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 172.17.1.41:3301
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     4
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Tue Nov 03 11:40:38,119<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=192.168.1.108 SYSNR=21 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '192.168.1.108:3321' not reached
+TIME        Tue Nov 03 11:40:38 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 192.168.1.108:3321
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     3
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Tue Nov 03 11:40:40,136<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=192.168.1.108 SYSNR=21 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '192.168.1.108:3321' not reached
+TIME        Tue Nov 03 11:40:40 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 192.168.1.108:3321
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     5
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
+Error:     >Tue Nov 03 11:43:28,745<    RfcException raised by system [<unknown>]:
+	message: Connect to SAP gateway failed
+	Connection parameters: TYPE=A DESTINATION=sap_system_without_pool ASHOST=192.168.1.108 SYSNR=21 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '192.168.1.108:3321' not reached
+TIME        Tue Nov 03 11:43:28 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      D:/depot/bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 192.168.1.108:3321
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+

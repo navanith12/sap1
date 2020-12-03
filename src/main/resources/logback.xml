@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <timestamp key="bySecond" datePattern="yyyy-MM-dd-HH-mm-ss" timeZone="America/New-York"/>
+    <!--    <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--        <file>${LOG_FILE}</file>-->
+
+    <!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+    <!--            <fileNamePattern>logs/archived/app.%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
+    <!--            &lt;!&ndash; each archived file, size max 5KB &ndash;&gt;-->
+    <!--            <maxFileSize>5KB</maxFileSize>-->
+    <!--            &lt;!&ndash; total size of all archive files, if total size > 20KB,-->
+    <!--				it will delete old archived file &ndash;&gt;-->
+    <!--            <totalSizeCap>20KB</totalSizeCap>-->
+    <!--            &lt;!&ndash; 60 days to keep &ndash;&gt;-->
+    <!--            <maxHistory>60</maxHistory>-->
+    <!--        </rollingPolicy>-->
+
+    <!--        <encoder>-->
+    <!--            <pattern>%d %m%n</pattern>-->
+    <!--        </encoder>-->
+    <!--    </appender>-->
+
+<!--    <appender name="FILE1" class="ch.qos.logback.core.FileAppender">-->
+<!--        <file>src/main/resources/Master${bySecond}.log</file>-->
+<!--        <append>true</append>-->
+<!--        <layout class="ch.qos.logback.classic.PatternLayout">-->
+<!--            <Pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</Pattern>-->
+<!--        </layout>-->
+<!--    </appender>-->
+
+    <appender name = "DB" class="ch.qos.logback.classic.db.DBAppender">
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+            <driverClass>com.mysql.jdbc.Driver</driverClass>
+            <url>jdbc:mysql://35.209.194.38:3306/sap_data_lake</url>
+            <user>root</user>
+            <password>miracle</password>
+        </connectionSource>
+    </appender>
+
+<!--    <appender name="FILE2" class="ch.qos.logback.core.FileAppender">-->
+<!--        <file>src/main/resources/Job${bySecond}.log</file>-->
+<!--        <append>true</append>-->
+<!--        <layout class="ch.qos.logback.classic.PatternLayout">-->
+<!--            <Pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</Pattern>-->
+<!--        </layout>-->
+<!--    </appender>-->
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+    
+
+    <logger name="com.miraclesoft.datalake" level="all" additivity="false">
+        <appender-ref ref="DB"/>
+    </logger>
+
+<!--    <logger name="com.miraclesoft.datalake.mongo.controller.ExtractorController" additivity="false" level="trace">-->
+<!--        <appender-ref ref="FILE2" />-->
+<!--    </logger>-->
+<!--   <logger name="com.miraclesoft.datalake.mongo" additivity="false" level="trace">
+        <appender-ref ref="FILE2" />
+    </logger> -->
+
+    <logger name="com.miraclesoft.datalake" level="trace" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <root level="error">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+
+</configuration>
